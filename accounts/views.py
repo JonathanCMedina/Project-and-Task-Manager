@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from accounts.forms import SignUpForm, LoginForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def signup(request):
@@ -49,3 +50,8 @@ def user_login(request):
         "form": form,
     }
     return render(request, "accounts/login.html", context)
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect("login")
