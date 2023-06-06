@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+#this is for users to sign up and create an account
+#linked to signup.html, url is "signup/" with name="signup"
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -29,6 +31,8 @@ def signup(request):
     }
     return render(request, "accounts/signup.html", context)
 
+#this is for logging in
+#html page is login.html, url is "login/" name="login"
 def user_login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -51,6 +55,9 @@ def user_login(request):
     }
     return render(request, "accounts/login.html", context)
 
+#this is for logging out
+#there is no html path because this is just a function that does something
+#it does have a url path at "logout/" name="logout"
 @login_required
 def user_logout(request):
     logout(request)

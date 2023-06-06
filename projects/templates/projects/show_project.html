@@ -1,0 +1,45 @@
+<!-- feature 13 step 4 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Show Project </title>
+</head>
+<body>
+    <main>
+        <div>
+          <h1>  {{ project_object.name }} </h1>
+          <p> {{ project_object.description }}</p>
+          <h2> Tasks </h2>
+          {% if project_object.tasks.all|length == 0 %}
+          <p> This project has no tasks </p>
+          {% else %}
+               <table>
+                   <thead>
+                       <tr>
+                            <th> Name </th>
+                            <th> Assignee </th>
+                            <th> Start date </th>
+                            <th> Due date </th>
+                            <th> Is completed </th>
+                       </tr>
+                  </thead>
+                   <tbody>
+                      {% for task in project_object.tasks.all %}
+                      <tr>
+                          <td> {{ task.name }} </td>
+                          <td> {{ task.assignee }} </td>
+                          <td> {{ task.start_date }} </td>
+                          <td> {{ task.due_date }} </td>
+                          <td> {{ task.is_complete|yesno:"yes, no" }} </td>
+                      </tr>
+                       {% endfor %}
+                  </tbody>
+              </table>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

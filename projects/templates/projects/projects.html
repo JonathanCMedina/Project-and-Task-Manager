@@ -22,10 +22,12 @@
                          </tr>
                     </thead>
                      <tbody>
-                        {% for item in projects %}
+                        {% for project in projects %}
                         <tr>
-                            <td> {{ item.name }} </td>
-                            <td> {{ item.projects.all|length }} </td>
+                            <td>
+                                <a href="{% url 'show_project' project.id %}"> {{ project.name }} </a>
+                            </td>
+                            <td> {{ project.tasks.all|length }} </td>
                         </tr>
                          {% endfor %}
                     </tbody>
