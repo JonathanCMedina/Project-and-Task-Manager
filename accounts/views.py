@@ -19,7 +19,7 @@ def signup(request):
                     password=password
                 )
                 login(request, user)
-                return redirect("home")
+                return redirect("list_projects")
             else:
                 form.add_error("password", "The passwords do not match")
     else:
