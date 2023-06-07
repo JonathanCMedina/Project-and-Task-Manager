@@ -1,8 +1,10 @@
 from django.contrib import admin
 from tasks.models import Task
+
 # Register your models here.
 
-#feature 12
+
+# feature 12
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = (
@@ -11,5 +13,5 @@ class TaskAdmin(admin.ModelAdmin):
         "due_date",
         "project",
         "assignee",
-        "id"
+        "id",
     )

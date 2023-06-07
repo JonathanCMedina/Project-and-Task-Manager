@@ -2,8 +2,9 @@ from django.db import models
 from django.conf import settings
 from projects.models import Project
 
+
 # Create your models here.
-#feature 11
+# feature 11
 class Task(models.Model):
     name = models.CharField(max_length=200)
     start_date = models.DateTimeField()

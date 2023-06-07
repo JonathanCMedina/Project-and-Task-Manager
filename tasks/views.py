@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from tasks.forms import CreateTaskForm
 from tasks.models import Task
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
-#feature 15
+# feature 15
 @login_required
 def create_task(request):
     if request.method == "POST":
@@ -16,17 +17,14 @@ def create_task(request):
             return redirect("list_projects")
     else:
         form = CreateTaskForm()
-    context = {
-        "form": form
-    }
+    context = {"form": form}
     return render(request, "tasks/create_task.html", context)
+
 
 @login_required
 def view_tasks(request):
     tasks_view = Task.objects.filter(assignee=request.user)
-    context = {
-        "tasks_view": tasks_view
-    }
+    context = {"tasks_view": tasks_view}
     return render(request, "tasks/view_tasks.html", context)
 
 
