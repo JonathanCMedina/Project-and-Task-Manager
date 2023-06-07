@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from tasks.forms import CreateTaskForm
+from tasks.models import Task
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -19,3 +20,21 @@ def create_task(request):
         "form": form
     }
     return render(request, "tasks/create_task.html", context)
+
+@login_required
+def view_tasks(request):
+    tasks_view = Task.objects.filter(assignee=request.user)
+    context = {
+        "tasks_view": tasks_view
+    }
+    return render(request, "tasks/view_tasks.html", context)
+
+
+# @login_required
+# def show_project(request, id):
+#     project = get_object_or_404(Project, id=id)
+#     # project = Project.objects.filter(owner=request.user)
+#     context = {
+#         "project_object": project
+#     }
+#     return render(request, "projects/show_project.html", context)
