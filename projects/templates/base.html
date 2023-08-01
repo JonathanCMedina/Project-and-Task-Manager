@@ -1,0 +1,103 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/projects_lewks.css' %}">
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <div class="nav_bar_left">
+                <ul class="list-inline">
+                {% if user.is_authenticated %}
+                <li>
+                <a href="{% url 'create_project' %}">
+                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script> <lord-icon
+                    src="https://cdn.lordicon.com/hiqmdfkt.json"
+                    trigger="hover"
+                    title="Create a new project"
+                    colors="primary:#9cf4a7,secondary:#c69cf4"
+                    style="width:60px;height:60px">
+                </lord-icon> </a>
+                </li>
+                <li>
+                <a href="{% url 'create_task' %}">
+                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script> <lord-icon
+                       src="https://cdn.lordicon.com/zgogqkqu.json"
+                       trigger="hover"
+                       title="Create a new task"
+                       colors="primary:#9cf4a7,secondary:#c69cf4"
+                       style="width:60px;height:60px">
+                   </lord-icon> </a>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+            <div class="nav_bar_right">
+                <ul class ="list-inline">
+                    {% if user.is_authenticated %}
+                        <li> <a href="{% url 'projects_list' %}">
+                            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/ggqtvqxi.json"
+                                trigger="hover"
+                                title="Show my projects"
+                                colors="primary:#9cf4a7,secondary:#c69cf4"
+                                style="width:60px;height:60px">
+                            </lord-icon></a> </li>
+                        <li> <a href="{% url 'show_my_tasks' %}">
+                            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/wizuwpye.json"
+                                    trigger="hover"
+                                    title="Show my tasks"
+                                    colors="primary:#9cf4a7,secondary:#c69cf4"
+                                    style="width:60px;height:60px">
+                                </lord-icon> </a> </li>
+                        <li> <a href="{% url 'logout' %}">
+                            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/hcuxerst.json"
+                                trigger="hover"
+                                title="Logout"
+                                colors="primary:#9cf4a7,secondary:#c69cf4"
+                                style="width:60px;height:60px">
+                            </lord-icon> </a> </li>
+                    {% else %}
+                        <li> <a href="{% url 'login' %}" > <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/ljvjsnvh.json"
+                                trigger="hover"
+                                title="Login"
+                                colors="primary:#9cf4a7,secondary:#c69cf4"
+                                state="hover-1"
+                                style="width:60px;height:60px">
+                            </lord-icon> </a> </li>
+                        <li> <a href="{% url 'signup' %}" > <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/ljvjsnvh.json"
+                                trigger="morph"
+                                title="Signup"
+                                colors="primary:#9cf4a7,secondary:#c69cf4"
+                                state="morph"
+                                style="width:60px;height:60px">
+                            </lord-icon> </a> </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="content">
+        {% block content %} {% endblock content %}
+    </main>
+    <footer class="footer">
+        <p> Project Alpha by Jonathan Ceasar Medina </p>
+    </footer>
+</body>
+</html>

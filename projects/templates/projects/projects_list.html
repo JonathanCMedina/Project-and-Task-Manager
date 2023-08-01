@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} List of Projects {% endblock title %}
+
+{% block content %}
+        <div>
+            <h1> My Projects </h1>
+            <p>
+            </p>
+            {% if projects_list|length == 0 %}
+            <p> You are not assigned to any projects </p>
+            {% else %}
+                 <table class="styled-table">
+                     <thead>
+                         <tr>
+                              <th> Name </th>
+                             <th> Number of tasks </th>
+                         </tr>
+                    </thead>
+                     <tbody>
+                        {% for project in projects_list %}
+                        <tr class="active-row">
+                            <td>
+                                <a href="{% url 'project_detail' project.id %}"> {{ project.name }} </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'project_detail' project.id %}" > {{ project.tasks.all|length }} </a>
+                            </td>
+                        </tr>
+                         {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+{% endblock content %}

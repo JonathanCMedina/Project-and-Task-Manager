@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} My tasks {% endblock title %}
+
+
+
+{% block content %}
+        <div>
+            <h1> My Tasks </h1>
+            {% if view_my_tasks|length == 0 %}
+            <p> You have no tasks </p>
+            {% else %}
+                 <table class="styled-table">
+                     <thead>
+                         <tr>
+                              <th> Name </th>
+                              <th> Start date </th>
+                              <th> Due date </th>
+                              <th> Is completed </th>
+                         </tr>
+                    </thead>
+                     <tbody>
+                        {% for task in view_my_tasks.all %}
+                        <tr class="active-row">
+                            <td> {{ task.name }} </td>
+                            <td> {{ task.start_date }} </td>
+                            <td> {{ task.due_date }} </td>
+                            <td> {{ task.is_complete|yesno:"yes, no" }} </td>
+                        </tr>
+                         {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+{% endblock content %}

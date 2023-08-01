@@ -20,7 +20,7 @@ from django.shortcuts import redirect
 
 
 def redirect_to_project_list_page(request):
-    return redirect("list_projects")
+    return redirect("projects_list")
 
 
 urlpatterns = [

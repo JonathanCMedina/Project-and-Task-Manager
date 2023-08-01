@@ -1,28 +1,8 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login {% endblock title %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-            {% if user.is_authenticated %}
-                <li> <a href="{% url 'show_my_tasks' %}"> My tasks </a> </li>
-                <li> <a href="{% url 'list_projects' %}"> My projects </a> </li>
-                <li> <a href="{% url 'logout' %}"> Logout </a> </li>
-            {% else %}
-                <li> <a href="{% url 'login' %}" > Login </a> </li>
-                <li> <a href="{% url 'signup' %}" > Signup </a> </li>
-            {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
+{% block content %}
         <div>
             <h1> Login </h1>
             <form method="post">
@@ -31,6 +11,4 @@
                 <button> Login </button>
             </form>
         </div>
-    </main>
-</body>
-</html>
+{% endblock content %}

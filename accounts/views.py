@@ -19,7 +19,7 @@ def signup(request):
             if password == password_confirmation:
                 user = User.objects.create_user(username, password=password)
                 login(request, user)
-                return redirect("list_projects")
+                return redirect("projects_list")
             else:
                 form.add_error("password", "The passwords do not match")
     else:

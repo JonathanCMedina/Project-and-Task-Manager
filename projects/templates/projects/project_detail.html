@@ -1,37 +1,16 @@
-<!-- feature 13 step 4 -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Show Project </title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-            {% if user.is_authenticated %}
-                <li> <a href="{% url 'show_my_tasks' %}"> My tasks </a> </li>
-                <li> <a href="{% url 'list_projects' %}"> My projects </a> </li>
-                <li> <a href="{% url 'logout' %}"> Logout </a> </li>
-            {% else %}
-                <li> <a href="{% url 'login' %}" > Login </a> </li>
-                <li> <a href="{% url 'signup' %}" > Signup </a> </li>
-            {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Show Project Details {% endblock title %}
+
+{% block content %}
         <div>
           <h1>  {{ project_object.name }} </h1>
           <p> {{ project_object.description }}</p>
           <h2> Tasks </h2>
-          <a href="{% url 'create_task' %}" > Create a new task </a>
           {% if project_object.tasks.all|length == 0 %}
           <p> This project has no tasks </p>
           {% else %}
-               <table>
+               <table class="styled-table">
                    <thead>
                        <tr>
                             <th> Name </th>
@@ -43,7 +22,7 @@
                   </thead>
                    <tbody>
                       {% for task in project_object.tasks.all %}
-                      <tr>
+                      <tr class="active-row">
                           <td> {{ task.name }} </td>
                           <td> {{ task.assignee }} </td>
                           <td> {{ task.start_date }} </td>
@@ -54,7 +33,16 @@
                   </tbody>
               </table>
             {% endif %}
+            <a href='{% url "edit_project" project_object.id %}'>
+                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                <lord-icon
+                    src="https://cdn.lordicon.com/edxgdhxu.json"
+                    trigger="hover"
+                    title="Edit this project"
+                    colors="primary:#9cf4a7,secondary:#c69cf4"
+                    state="hover-1"
+                    style="width:60px;height:60px">
+                </lord-icon>
+              </a>
         </div>
-    </main>
-</body>
-</html>
+{% endblock content %}

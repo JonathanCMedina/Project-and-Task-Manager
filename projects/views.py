@@ -12,19 +12,19 @@ from django.contrib.auth.decorators import login_required
 # Feature 8 is responsible for the login_required decorator
 # and the filter on the projects = line
 @login_required
-def project(request):
+def projects_list(request):
     projects = Project.objects.filter(owner=request.user)
-    context = {"projects": projects}
-    return render(request, "projects/projects.html", context)
+    context = {"projects_list": projects}
+    return render(request, "projects/projects_list.html", context)
 
 
 # feature 13
 @login_required
-def show_project(request, id):
+def project_detail(request, id):
     project = get_object_or_404(Project, id=id)
     # project = Project.objects.filter(owner=request.user)
     context = {"project_object": project}
-    return render(request, "projects/show_project.html", context)
+    return render(request, "projects/project_detail.html", context)
 
 
 # feature 14
@@ -36,8 +36,24 @@ def create_project(request):
             project = form.save(False)
             project.owner = request.user
             project.save()
-            return redirect("list_projects")
+            return redirect("projects_list")
     else:
         form = CreateProjectForm()
     context = {"form": form}
     return render(request, "projects/create_project.html", context)
+
+@login_required
+def edit_project(request, id):
+    edit = get_object_or_404(Project, id=id)
+    if request.method == "POST":
+        form = CreateProjectForm(request.POST, instance=edit)
+        if form.is_valid():
+            form.save()
+            return redirect("projects_list", id=id)
+    else:
+        form = CreateProjectForm(instance=edit)
+    context = {
+        "project_object": edit,
+        "form": form
+    }
+    return render(request, "projects/edit_project.html", context)
